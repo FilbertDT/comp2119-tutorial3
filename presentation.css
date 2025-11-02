@@ -1,0 +1,682 @@
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
+:root {
+	--white: #fff;
+	--blue: #0074d9;
+	--blue-hover: #0056b3;
+	--bg: #222;
+	--gray: #666;
+	--gray-hover: #444;
+	--success: #28a745;
+	--success-hover: #218838;
+}
+
+/* Base HTML elements */
+table {
+	width: 80%;
+	border-collapse: collapse;
+	margin: auto;
+}
+
+th, td {
+	border: 1px solid #ccc;
+	padding: 0.4em 0.8em;
+	text-align: center;
+}
+
+th {
+	background-color: var(--bg);
+	color: var(--white);
+}
+
+code {
+	font-size: 32pt;
+}
+
+section {
+	text-align: left;
+}
+
+/* Global utility classes */
+.common-mistakes {
+	color: #ff6666;
+	font-weight: bold;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+
+/* ========================================
+   GROWTH RATE VISUALIZATION
+   ======================================== */
+
+#growth-rate-controls {
+	width: 100%;
+	height: -webkit-fill-available;
+	text-align: center;
+}
+
+#growth-rate-controls button {
+	margin: 0.1em 0;
+	padding: 8px 16px;
+	border: none;
+	background: var(--bg);
+	color: var(--white);
+	border-radius: 4px;
+	font-size: 1em;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+#growth-rate-controls button:hover,
+#growth-rate-controls button.active {
+	background: var(--blue);
+}
+
+#growth-rate-graph {
+	height: -webkit-fill-available;
+	place-content: center;
+	padding: 1em;
+}
+
+
+/* ========================================
+   2-STACK QUEUE - ANIMATED DEMO
+   ======================================== */
+
+.twostack-controls {
+	display: flex;
+	gap: 0.5em;
+	margin-bottom: 1.5em;
+	justify-content: center;
+	align-items: center;
+}
+
+.twostack-controls button {
+	padding: 0.5em 1em;
+	font-size: 0.9em;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.2s;
+	font-weight: 600;
+}
+
+.twostack-controls button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.twostack-btn-queue {
+	background: var(--blue);
+	color: var(--white);
+}
+
+.twostack-btn-undo {
+	background: var(--success);
+	color: var(--bg);
+	font-size: 1.4em;
+	padding: 0.3em 0.6em;
+	min-width: 40px;
+}
+
+.twostack-btn-undo:hover {
+	background: var(--success-hover);
+}
+
+.twostack-btn-reset {
+	background: var(--gray);
+	color: var(--white);
+	font-size: 1.4em;
+	padding: 0.3em 0.6em;
+	min-width: 40px;
+}
+
+.twostack-btn-reset:hover {
+	background: var(--gray-hover);
+}
+
+.twostack-container {
+	display: flex;
+	flex-direction: row;
+	gap: 2rem;
+}
+
+.twostack-stack-wrapper {
+	width: 50%;
+	background: var(--bg);
+	border-radius: 12px;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.twostack-stack-header {
+	margin-bottom: 1rem;
+}
+
+.twostack-stack-subtitle {
+	margin: 0 0 1em 0;
+	color: #aaa;
+	font-size: 0.95em;
+}
+
+.twostack-stack-visual {
+	min-height: 350px;
+	height: -webkit-fill-available;
+	border: 3px dashed var(--gray);
+	border-radius: 12px;
+	padding: 1em;
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: end;
+	gap: 0.5em;
+	position: relative;
+}
+
+.twostack-stack-item {
+	background: var(--blue);
+	color: var(--white);
+	padding: 1rem;
+	border-radius: 8px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 2rem;
+	animation: twostack-slideIn 0.3s ease-out;
+}
+
+@keyframes twostack-slideIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.twostack-algorithm-display {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.twostack-algorithm-section {
+	background: var(--bg);
+	border-radius: 12px;
+	padding: 2rem;
+	height: 100%;
+}
+
+.twostack-algorithm-section h4 {
+	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+}
+
+.twostack-algorithm-section pre {
+	margin: 0;
+	background: transparent;
+	box-shadow: none;
+}
+
+.twostack-algorithm-section code {
+	display: flex !important;
+	flex-direction: column !important;
+	font-size: 1.8rem;
+	font-family: 'Fira Code', 'Consolas', monospace;
+	color: #abb2bf;
+	background: transparent;
+	padding: 0;
+}
+
+.twostack-algorithm-section code span {
+	display: block;
+	padding: 0.5rem;
+	border-radius: 6px;
+	transition: all 0.3s ease;
+	line-height: 2rem;
+}
+
+.twostack-algorithm-section code span.highlight {
+	background: linear-gradient(90deg, rgba(0, 116, 217, 0.5), rgba(0, 116, 217, 0.3));
+	color: var(--white);
+	font-weight: bold;
+	transform: translateX(4px);
+	box-shadow: 0 0 10px rgba(0, 116, 217, 0.4);
+}
+
+.twostack-queue-wrapper {
+	width: -webkit-fill-available;
+	background: var(--bg);
+	border-radius: 12px;
+	padding: 2rem 32px;
+	margin-top: 2rem;
+}
+
+.twostack-queue-header p:first-child {
+	margin: 0 0 0.3em 0;
+	color: var(--white);
+	font-weight: bold;
+}
+
+.twostack-queue-subtitle {
+	margin: 0 0 1em 0;
+	color: #aaa;
+	font-size: 0.95em;
+}
+
+.twostack-queue-display {
+	min-height: 100px;
+	border: 3px dashed var(--gray);
+	border-radius: 12px;
+	padding: 1em;
+	display: flex;
+	flex-direction: row;
+	gap: 0.5em;
+	position: relative;
+	align-items: center;
+	justify-content: flex-start;
+	overflow-x: auto;
+}
+
+.twostack-queue-item {
+	background: var(--success);
+	color: var(--white);
+	padding: 1rem 1.5rem;
+	border-radius: 8px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 2rem;
+	min-width: 80px;
+	flex-shrink: 0;
+	animation: twostack-slideInHorizontal 0.3s ease-out;
+	position: relative;
+}
+
+@keyframes twostack-slideInHorizontal {
+	from {
+		opacity: 0;
+		transform: translateX(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.twostack-empty-label {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: #666;
+	font-size: 1.3em;
+}
+
+
+/* ========================================
+   2-STACK QUEUE - INTERACTIVE PRACTICE
+   ======================================== */
+
+#interactive-stacks {
+	width: 100%;
+	padding: 2em;
+	color: var(--white);
+}
+
+.interactive-controls {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 2rem;
+	flex-direction: row;
+	gap: 2rem;
+}
+
+.interactive-btn-add {
+	width: 14rem;
+	height: 12rem;
+	font-size: 4rem;
+	border: none;
+	border-radius: 8px;
+	background: var(--success);
+	color: var(--white);
+	cursor: pointer;
+	transition: all 0.2s;
+	font-weight: 600;
+}
+
+.interactive-btn-add:hover {
+	background: var(--success-hover);
+	transform: scale(1.05);
+}
+
+.interactive-container {
+	display: flex;
+	gap: 2rem;
+	justify-content: center;
+	margin-bottom: 2rem;
+}
+
+#interactive-stacks .twostack-stack-wrapper {
+	width: 50%;
+}
+
+#interactive-stacks .twostack-stack-header h3 {
+	margin: 0;
+	font-size: 2rem;
+	color: var(--white);
+}
+
+#interactive-stacks .twostack-stack-visual {
+	min-height: 450px;
+}
+
+.interactive-item {
+	background: var(--blue);
+	color: var(--white);
+	padding: 1rem;
+	border-radius: 8px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 2rem;
+	cursor: move;
+	user-select: none;
+	transition: all 0.2s;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	animation: twostack-slideIn 0.3s ease-out;
+}
+
+.interactive-item:hover {
+	transform: scale(1.05);
+	box-shadow: 0 4px 12px rgba(0, 116, 217, 0.5);
+}
+
+.interactive-item.dragging {
+	opacity: 0.3;
+}
+
+.interactive-item-pool {
+	border: 3px dashed var(--gray);
+	border-radius: 12px;
+	padding: 1rem;
+	background: rgba(255, 255, 255, 0.02);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 1rem;
+	align-items: flex-start;
+	position: relative;
+	transition: all 0.3s;
+	width: -webkit-fill-available;
+	align-content: center;
+}
+
+.interactive-item-pool.drag-over {
+	border-color: var(--warning);
+	background: rgba(220, 53, 69, 0.1);
+}
+
+.interactive-item-pool .interactive-item {
+	background: var(--gray);
+	opacity: 0.8;
+}
+
+.interactive-trash {
+	width: 14rem;
+	border: 3px dashed var(--warning);
+	border-radius: 12px;
+	padding: 1rem;
+	background: rgba(220, 53, 69, 0.1);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	transition: all 0.3s;
+	min-height: 8rem;
+}
+
+.interactive-trash.drag-over {
+	border-color: var(--warning);
+	background: var(--warning);
+	transform: scale(1.05);
+}
+
+.interactive-trash-icon {
+	font-size: 3rem;
+}
+
+.interactive-drag-preview {
+	background: var(--blue-hover);
+	border: 2px dashed var(--blue);
+	color: transparent;
+	padding: 1rem;
+	border-radius: 8px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 2rem;
+	height: 4rem;
+	animation: interactive-pulse 1s ease-in-out infinite;
+}
+
+@keyframes interactive-pulse {
+	0%, 100% {
+		opacity: 0.4;
+	}
+	50% {
+		opacity: 0.7;
+	}
+}
+
+.twostack-stack-visual.drag-over {
+	border-color: var(--blue);
+	background: var(--blue-hover);
+}
+
+
+/* ========================================
+   MIN STACK VISUALIZATION
+   ======================================== */
+
+#min-stack-visualizer {
+	width: 100%;
+	padding: 2em;
+	color: var(--white);
+}
+
+.minstack-controls {
+	display: flex;
+	gap: 1rem;
+	margin-top: 2rem;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.minstack-btn {
+	width: 8rem;
+	height: 8rem;
+	font-size: 3rem;
+	border: none;
+	border-radius: 8px;
+	background: var(--success);
+	color: var(--white);
+	cursor: pointer;
+	transition: all 0.2s;
+	font-weight: 600;
+}
+
+.minstack-btn:hover {
+	background: var(--success-hover);
+	transform: scale(1.05);
+}
+
+.minstack-btn:disabled {
+	background: var(--gray);
+	cursor: not-allowed;
+	transform: none;
+}
+
+.minstack-container {
+	display: flex;
+	gap: 3rem;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.minstack-code-section {
+	flex: 1;
+	display: flex;
+	height: -webkit-fill-available;
+	background: var(--bg);
+	border-radius: 12px;
+	padding: 2rem;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.minstack-code-section h4 {
+	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+	color: var(--white);
+}
+
+.minstack-code-section pre {
+	margin: 0;
+	background: transparent;
+	box-shadow: none;
+}
+
+.minstack-code-section code {
+	display: flex !important;
+	flex-direction: column !important;
+	font-size: 1.6rem;
+	font-family: 'Fira Code', 'Consolas', monospace;
+	color: var(--white);
+	background: transparent;
+	padding: 0;
+	line-height: 2.2rem;
+}
+
+.minstack-code-section code span {
+	display: block;
+	padding: 0.4rem;
+	border-radius: 6px;
+	transition: all 0.3s ease;
+}
+
+.minstack-code-section code span.highlight {
+	background: linear-gradient(90deg, rgba(0, 116, 217, 0.5), rgba(0, 116, 217, 0.3));
+	color: var(--white);
+	font-weight: bold;
+	transform: translateX(4px);
+	box-shadow: 0 0 10px rgba(0, 116, 217, 0.4);
+}
+
+.minstack-result {
+	margin-top: 2rem;
+	padding: 1.5rem;
+	background: var(--success-hover);
+	border: 2px solid var(--success);
+	border-radius: 8px;
+	font-size: 1.8rem;
+	font-weight: bold;
+	text-align: center;
+	color: var(--success);
+	min-height: 4rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.minstack-result:empty {
+	display: none;
+}
+
+.minstack-visual-section {
+	flex: 1;
+	background: var(--bg);
+	border-radius: 12px;
+	padding: 2rem;
+}
+
+.minstack-visual-section h4 {
+	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+	color: var(--white);
+}
+
+.minstack-display {
+	min-height: 400px;
+	border: 3px dashed var(--gray);
+	border-radius: 12px;
+	padding: 1em;
+	display: flex;
+	flex-direction: column-reverse;
+	gap: 0.5em;
+	position: relative;
+	background: var(--bg);
+}
+
+.minstack-item {
+	background: var(--blue);
+	color: var(--white);
+	padding: 1rem;
+	border-radius: 8px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 2rem;
+	transition: all 0.3s ease;
+	position: relative;
+}
+
+.minstack-item.current {
+	background: var(--success);
+	color: var(--bg);
+	transform: scale(1.1);
+	box-shadow: 0 0 20px var(--success);
+}
+
+.minstack-item.min-found {
+	background: var(--success);
+	box-shadow: 0 0 20px var(--success-hover);
+}
+
+.minstack-item.checked {
+	opacity: 0.6;
+}
+
+.minstack-item-index {
+	position: absolute;
+	left: -2.5rem;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 1.2rem;
+	color: var(--white);
+	font-weight: normal;
+}
+
+.minstack-var-display {
+	margin-top: 2rem;
+	padding: 1.5rem;
+	background: var(--gray-hover);
+	border-radius: 8px;
+	text-align: center;
+	font-size: 2rem;
+}
+
+.minstack-var-display span {
+	color: var(--success);
+	font-weight: bold;
+}

@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Tutorial 3</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reset.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/black.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/plugin/highlight/monokai.css">
+
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/math/math.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/highlight/highlight.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+
+	<link rel="stylesheet" href="presentation.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+			<section>
+				<h1>Tutorial 3</h1>
+				<p style="font-size: 1em; background: #222; color: var(--gray); padding: 2rem; border-radius: 8px; font-family: 'Fira Code', 'Consolas', monospace;">
+					Please use your arrow keys to navigate through the slides.
+				</p>
+			</section>
+
+			<section>
+				<section>
+					<h1>Question 1A</h1>
+					<table>
+						<thead>
+							<tr>
+								<th>$f(n)$</th>
+								<th>$g(n)$</th>
+								<th>$O$</th>
+								<th>$\Omega$</th>
+								<th>$\Theta$</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>$50n$</td>
+								<td>$100n$</td>
+								<td>T</td>
+								<td>T</td>
+								<td>T</td>
+							</tr>
+							<tr>
+								<td>$\log_5 n$</td>
+								<td>$\log_2(\log_3 n)$</td>
+								<td>F</td>
+								<td>T</td>
+								<td>F</td>
+							</tr>
+							<tr>
+								<td>$n!$</td>
+								<td>$n^n$</td>
+								<td>T</td>
+								<td>F</td>
+								<td>F</td>
+							</tr>
+							<tr>
+								<td>$\frac{n}{(\log_{10}(\log_2 n))^2}$</td>
+								<td>$(\sqrt{3})^{\log_2 n}$</td>
+								<td>F</td>
+								<td>T</td>
+								<td>F</td>
+							</tr>
+							<tr>
+								<td>$50n + 200 \log_5 n$</td>
+								<td>$2^{\log_3 n}$</td>
+								<td>F</td>
+								<td>T</td>
+								<td>F</td>
+							</tr>
+							<tr>
+								<td>$20 + 7\cos n$</td>
+								<td>$100 \sin^2 n + 2$</td>
+								<td>T</td>
+								<td>T</td>
+								<td>T</td>
+							</tr>
+							<tr>
+								<td>$e^{\log_4 n}$</td>
+								<td>$\log_2 (n!)$</td>
+								<td>T</td>
+								<td>F</td>
+								<td>F</td>
+							</tr>
+						</tbody>
+					</table>
+					<p><b>Explanation:</b><br>
+						$O \rightarrow \text{is upper bound growth rate}$ <br>
+						$\Omega \rightarrow \text{is lower bound growth rate}$ <br>
+						$\Theta \rightarrow \text{is tight bound/equivalent growth}$
+					</p>
+				</section>
+				<section>
+					<h2>Things to remember:</h2>
+					<ul>
+						<li class="fragment">General growth rates to memorise:<br>
+							$n!$ < $c^n$ < $n^c$ < $n \log n$ < $n$ < $\log n$ < $1$ <br>
+								Factorials < Exponential < Polynomial < Linear < Logarithmic < Constant <li
+									class="fragment">Goal of the game is to simplify the function as much as possible
+									until you can clearly see the general dominating term</li>
+						<li class="fragment">Remember that the constants do not matter here</li>
+						<li class="fragment">Oscillating functions like $\sin n$ and $\cos n$ are always bounded</li>
+					</ul>
+				</section>
+				<section>
+					<div style="display: flex; flex-direction: row; width: auto; height: auto;">
+						<div id="growth-rate-controls" style="display: flex; flex-direction: column; width: 20%;">
+							<button onclick="drawGrowth('constant')" id="btn-constant">O(1)</button>
+							<button onclick="drawGrowth('log')" id="btn-log">O(log n)</button>
+							<button onclick="drawGrowth('nested_log')" id="btn-nested_log">O(log log n)</button>
+							<button onclick="drawGrowth('linear')" id="btn-linear">O(n)</button>
+							<button onclick="drawGrowth('linearithmic')" id="btn-linearithmic">O(n log n)</button>
+							<button onclick="drawGrowth('poly')" id="btn-poly">O(n^2)</button>
+							<button onclick="drawGrowth('exp')" id="btn-exp">O(2^n)</button>
+							<button onclick="drawGrowth('factorial')" id="btn-factorial">O(n!)</button>
+							<button onclick="drawGrowth('sin')" id="btn-sin">sin(n)</button>
+							<button onclick="drawGrowth('cos')" id="btn-cos">cos(n)</button>
+						</div>
+						<div id="growth-rate-graph"></div>
+					</div>
+				</section>
+				<script src="presentation.js"></script>
+			</section>
+
+			<section>
+				<section>
+					<h1>Question 1B</h1>
+					<p class="fragment"><b>(i) Is $10000 n^3 = \Omega(n^{3.001})$?</b><br>
+						False. The $n^{3.001}$ term grows faster; no positive constant/coefficient satisfies the
+						definition.
+					</p>
+					<p class="fragment"><b>(ii) Is $3n^2 - 2 \sqrt{n} + 20 = \Theta(n^2)$?</b><br>
+						True. For sufficiently large $n$, it is bounded above and below by multiples of $n^2$ since it
+						is the dominating term (the function affecting the growth rate the most).
+					</p>
+				</section>
+				<section>
+					<h2>Things to remember:</h2>
+					<ul>
+						<li class="fragment">To find the dominant growth rate, convert all terms to the highest degree
+							and sum:<br>
+							$5n^2 + 3n + 7 \sim O(n^2)$ as $n \to \infty$.
+							<span class="fragment">
+								<br>i.e:
+								<br>$5n^2 + 3n^2 + 7n^2 = 15n^2 \sim O(n^2)$
+							</span>
+							<span class="fragment">
+								<br><br>$5n log n + 2^n + 15n^2$
+							</span>
+							<span class="fragment">
+								<br>Dominating term is $2^n$
+							</span>
+							<span class="fragment">
+								<br> $\sim O(2^n)$
+							</span>
+						</li>
+						<li class="fragment">Constants matter only when degrees are equal:<br>
+							<span class="fragment">$1000n$ vs $n$ $\implies$ $O(n)$ (constant factor doesn't change growth rate).<br></span>
+							<span class="fragment">$n^3$ vs $n^{3.001}$ $\implies$ $n^{3.001}$ dominates for large $n$.</span>
+						</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>Question 2A</h1>
+					<p>Most students solve the below</p>
+					<p> $T(n) = \begin{cases} 1, & n \leq 1 \\ T(n-2) + 5n, & n > 1 \end{cases}$</p>
+					<p>by considering only odd or only even values of $n$</p>
+				</section>
+				<section>
+					<h2>Why?</h2>
+					<p>The recurrence links $T(n)$ to $T(n-2)$, forming two independent sequences:</p>
+					<ul>
+						<li>Even indices: $E(k) = T(2k)$</li>
+						<li>Odd indices: $O(k) = T(2k+1)$</li>
+					</ul>
+				</section>
+				<section>
+					<h2>How to Solve</h2>
+					<p>Solve separate recurrences for $E(k)$ and $O(k)$ independently, then combine them for the
+						full solution.</p>
+				</section>
+				<section>
+					<h2>Things to remember:</h2>
+					<table style="width:90%;margin:auto;text-align:center;">
+						<thead>
+							<tr>
+								<th>Series Type</th>
+								<th>Formula</th>
+								<th>Sample (n=1..5)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Geometric</td>
+								<td>$\sum_{i=0}^{n} r^i = \frac{r^{n+1}-1}{r-1}$</td>
+								<td>1, 2, 4, 8, 16 ($r=2$)</td>
+							</tr>
+							<tr>
+								<td>Arithmetic</td>
+								<td>$\sum_{i=1}^{n} i = \frac{n(n+1)}{2}$</td>
+								<td>1, 3, 6, 10, 15</td>
+							</tr>
+							<tr>
+								<td>Squares</td>
+								<td>$\sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6}$</td>
+								<td>1, 5, 14, 30, 55</td>
+							</tr>
+							<tr>
+								<td>Cubes</td>
+								<td>$\sum_{i=1}^{n} i^3 = \left(\frac{n(n+1)}{2}\right)^2$</td>
+								<td>1, 9, 36, 100, 225</td>
+							</tr>
+							<tr>
+								<td>Telescoping</td>
+								<td>$\sum_{k=1}^n \frac{1}{k(k+1)} = 1 - \frac{1}{n+1}$</td>
+								<td>0.5, 0.666..., 0.75, 0.8, 0.833...</td>
+							</tr>
+						</tbody>
+					</table>
+					<p>Use these formulas to solve recurrences by expanding and summing terms.</p>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>Q2b: Write recurrence</h1>
+					<ul>
+						<li>(i) Regions formed by $n$ intersecting circles:<br>
+							$T(n) = \begin{cases}
+							2, & n=1 \\
+							T(n-1) + 2(n-1), & n>1
+							\end{cases}$
+						</li>
+						<li>(ii) Number strings length $n$ with substring 'bbb':<br>
+							$T(n) = \begin{cases}
+							0, & n \le 2 \\
+							T(n-1) + T(n-2) + T(n-3) + 2^{n-3}, & n > 2
+							\end{cases}$
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Things to remember:</h2>
+					<ul>
+						<li>Identify base cases and recurrence relation clearly.</li>
+						<li>For counting problems, break into cases and sum over all possibilities.</li>
+						<li>For pattern counting, consider how new elements affect the count (e.g. adding a circle or a
+							digit).</li>
+					</ul>
+				</section>
+				<section>
+					<h2 class="common-mistakes">Common mistakes:</h2>
+					<ul>
+						<li>Overlooking base cases.</li>
+						<li>Miscounting pattern occurrences.</li>
+						<li>For Q2(b)(ii), a valid approach is to express the count as $2^n - S(n)$, where $S(n)$
+							denotes the number of length‑$n$ strings that do not contain 'bbb'. This yields a correct
+							recurrence, but students often fail to simplify the resulting relation.</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h1>Question 3</h1>
+					Many students mix up when to use mathematical induction and when to use telescoping sums.</li>
+				</section>
+
+				<section>
+					<ul>
+						<li class="fragment"><b>Mathematical induction:</b> A proof technique to show a statement P(n)
+							holds for all n ≥ n0 by (1) proving the base case P(n0), and (2) proving P(n) ⇒ P(n+1).</li>
+						<li class="fragment"><b>Telescoping sum:</b> An algebraic trick: rewrite terms so many cancel
+							pairwise, leaving only a few boundary terms to evaluate.</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Telescoping</h2>
+					<p>Simplify $\sum_{k=1}^{n} \frac{1}{k(k+1)}$</p>
+					<p>Step 1: Partial fraction / rewrite term:
+						$\frac{1}{k(k+1)} = \frac{1}{k} - \frac{1}{k+1}$.</p>
+					<p>Step 2: Substitute into the sum:
+						$\sum_{k=1}^{n}\left(\frac{1}{k}-\frac{1}{k+1}\right)$.</p>
+					<p>Step 3: Expand and cancel (telescoping):
+						$\left(1-\frac{1}{2}\right)+\left(\frac{1}{2}-\frac{1}{3}\right)+\cdots+\left(\frac{1}{n}-\frac{1}{n+1}\right)=1-\frac{1}{n+1}$.
+					</p>
+					<p>Key point: no induction required — pure algebraic cancellation produced the
+						result.</p>
+				</section>
+
+				<section>
+					<h2>Induction</h2>
+					<p>Prove: $\sum_{i=1}^n i = \frac{n(n+1)}{2}$ for all natural n.</p>
+					<p><b>Base case:</b> n=1: LHS=1, RHS=1(2)/2=1. OK.</p>
+					<p><b>Inductive step:</b> Assume true for n, i.e.
+						$\sum_{i=1}^n i = \frac{n(n+1)}{2}$. Then</p>
+					<p>
+						$\sum_{i=1}^{n+1} i = \left(\sum_{i=1}^n i\right) + (n+1)
+						= \frac{n(n+1)}{2} + (n+1)
+						= \frac{(n+1)(n+2)}{2},$
+					</p>
+					<p>which matches the formula with n → n+1. Hence true for all n by induction.</p>
+				</section>
+
+				<section>
+					<h2>When to use which — quick checklist</h2>
+					<ul>
+						<li class="fragment">Use telescoping when terms can be decomposed into successive differences
+							(e.g. $a_k = b_k - b_{k+1}$).</li>
+						<li class="fragment">Use induction when you need to prove a statement about all n and the n→n+1
+							step is natural.</li>
+					</ul>
+				</section>
+
+			</section>
+
+			<section>
+				<section>
+					<h1>Q4: Recursive modular factorial</h1>
+					<p>Convert $n!$ $mod$ $m$ to</p>
+					<p>
+						$T(n) = \begin{cases}
+						1, & n = 1 \\
+						(n \cdot T(n-1)) \mod m, & n > 1
+						\end{cases}$
+					</p>
+				</section>
+
+				<section>
+					<p>By telescoping, we get</p>
+					<ul>
+						<li>$T(n) = (n \cdot T(n-1)) \mod m$</li>
+						<li>$T(n) = (n \cdot ((n-1) \cdot T(n-2)) \mod m) \mod m$</li>
+						<li>$T(n) = (n \cdot ((n-1) \cdot ((n-2) \cdot T(n-3)) \mod m) \mod m) \mod m$</li>
+					</ul>
+					</p>
+				</section>
+				<section>
+					<pre style="font-size: 1em;"><code data-trim>
+function LargeNumMod(n, m)
+	if n == 1
+		return 1
+	else
+		return (n * LargeNumMod(n-1, m)) mod m
+					</code></pre>
+					<p>Computes $n! \mod m$ efficiently by modulo each recursive step.</p>
+					<p><b>Complexity:</b><br>
+						$T(n) = T(n-1) + c \implies O(n)$
+					</p>
+				</section>
+				<section>
+					<h2>Things to remember:</h2>
+					<ul>
+						<li>Always apply modulo at every multiplication step</li>
+						<li>Recursive computation is $O(n)$ time.</li>
+					</ul>
+				</section>
+				<section>
+					<h2 class="common-mistakes">Common mistakes:</h2>
+					<ul>
+						<li>Some student did not use a recursive algorithm</li>
+						<li>Using modulo on the recursive call instead of the final product.</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<h2 class="common-mistakes">Data Structure Problems</h2>
+			</section>
+
+			<section>
+				<section>
+					<h2 class="common-mistakes">A Queue from 2 Stacks</h2>
+					You are tasked to create a queue using only two stacks, namely <code>S1</code> and <code>S2</code>.
+					Each of the stacks have the following operations: <br>
+					<ul>
+						<li><code>isEmpty</code> - Check if the stack is empty</li>
+						<li><code>push(ele)</code> - Add an element to the top</li>
+						<li><code>pop()</code> - Remove & return the top element</li>
+						<li><code>top()</code> - Return the top element</li>
+					</ul>
+				</section>
+				<section>
+					<ul>
+						<li>Write algorithms for <code>enqueue</code> & <code>dequeue</code> operations only using these
+							stack operations.
+						</li>
+						<li>Starting from two empty stacks, show the state of <code>S1</code> and <code>S2</code> (list
+							elements from top to
+							bottom as they would be popped) after performing these operations in order:</li>
+						<ul>
+							<li><code>enqueue(1)</code>, <code>enqueue(2)</code>, <code>enqueue(3)</code></li>
+							<li><code>dequeue()</code></li>
+							<li><code>enqueue(4)</code>, <code>enqueue(5)</code></li>
+						</ul>
+					</ul>
+				</section>
+
+				<section>
+					<div id="interactive-stacks">
+						<div class="interactive-controls">
+							<button onclick="addNewItem()" class="interactive-btn-add">+</button>
+							<div id="item-pool" class="interactive-item-pool" ondrop="drop(event, 'pool')"
+								ondragover="allowDrop(event)">
+							</div>
+							<div id="trash-can" class="interactive-trash" ondrop="drop(event, 'trash')"
+								ondragover="allowDrop(event)">
+								<span class="interactive-trash-icon">🗑</span>
+							</div>
+						</div>
+
+
+						<div class="interactive-container">
+							<div class="twostack-stack-wrapper">
+								<div class="twostack-stack-header">
+									<h3>Stack 1</h3>
+								</div>
+								<div id="interactive-s1" class="twostack-stack-visual" ondrop="drop(event, 's1')"
+									style="flex-direction: column;" ondragover="allowDrop(event)">
+								</div>
+							</div>
+
+							<div class="twostack-stack-wrapper">
+								<div class="twostack-stack-header">
+									<h3>Stack 2</h3>
+								</div>
+								<div id="interactive-s2" class="twostack-stack-visual" ondrop="drop(event, 's2')"
+									style="flex-direction: column;" ondragover="allowDrop(event)">
+								</div>
+							</div>
+						</div>
+
+						<div class="fragment twostack-queue-wrapper">
+							<div class="twostack-queue-header">
+								<p><strong>Queue Display</strong></p>
+								<p class="twostack-queue-subtitle">Front → Rear</p>
+							</div>
+							<div id="interactive-queue" class="twostack-queue-display">
+								<div class="twostack-empty-label">Empty</div>
+							</div>
+						</div>
+
+					</div>
+				</section>
+
+				<section>
+					<h3>Enqueue Operation</h3>
+					<div class="twostack-algorithm-section">
+						<pre><code style="line-height: 2.5rem;">ENQUEUE(x)
+	S1.push(x)</code></pre>
+					</div>
+				</section>
+
+				<section>
+					<h3>Dequeue Operation</h3>
+					<div class="twostack-algorithm-section">
+						<pre><code style="line-height: 2.5rem;">DEQUEUE()
+	if S2.isEmpty()
+		while !S1.isEmpty()
+			S2.push(S1.pop())
+	return S2.pop()</code></pre>
+					</div>
+				</section>
+
+				<section>
+					<div id="queue-visualizer">
+						<div class="twostack-controls">
+							<button onclick="enqueueValue()" class="twostack-btn-queue">Enqueue</button>
+							<button onclick="dequeueValue()" class="twostack-btn-queue">Dequeue</button>
+							<button onclick="undoOperation()" class="twostack-btn-undo" title="Undo">↶</button>
+							<button onclick="resetQueue()" class="twostack-btn-reset" title="Reset">⟲</button>
+						</div>
+
+						<div class="twostack-container">
+							<div class="twostack-stack-wrapper">
+								<div class="twostack-stack-header">
+									<p>Enqueue Stack</p>
+									<p class="twostack-stack-subtitle">S1</p>
+								</div>
+								<div id="stack1" class="twostack-stack-visual">
+									<div class="twostack-empty-label">Empty</div>
+								</div>
+							</div>
+
+							<div class="twostack-stack-wrapper">
+								<div class="twostack-stack-header">
+									<p>Dequeue Stack</p>
+									<p class="twostack-stack-subtitle">S2</p>
+								</div>
+								<div id="stack2" class="twostack-stack-visual">
+									<div class="twostack-empty-label">Empty</div>
+								</div>
+							</div>
+
+							<div class="twostack-algorithm-display">
+								<div class="twostack-algorithm-section">
+									<h4>enqueue(x)</h4>
+									<pre><code id="enqueue-code"><span data-line="1">S1.push(x)</span></code></pre>
+								</div>
+								<div class="twostack-algorithm-section">
+									<h4>dequeue()</h4>
+									<pre><code id="dequeue-code"><span data-line="1">if S2.isEmpty()</span>
+							<span data-line="2">  while !S1.isEmpty()</span>
+							<span data-line="3">    S2.push(S1.pop())</span>
+							<span data-line="4">return S2.pop()</span></code></pre>
+								</div>
+							</div>
+						</div>
+
+						<div class="twostack-queue-wrapper">
+							<div class="twostack-queue-header">
+								<p>Queue</p>
+								<p class="twostack-queue-subtitle">Front → Rear</p>
+							</div>
+							<div id="queue" class="twostack-queue-display">
+								<div class="twostack-empty-label">Empty</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+				<section>
+					<h2>Time Complexity Analysis</h2>
+					<p>Let's analyze the time complexity of the 2-stack queue operations.</p>
+				</section>
+
+				<section>
+					<h3>Enqueue Operation</h3>
+					<div class="twostack-algorithm-section">
+						<pre><code style="line-height: 2.5rem;">S1.push(x)</code></pre>
+					</div>
+					<ul>
+						<li class="fragment"><b>Time complexity:</b> $O(1)$</li>
+						<li class="fragment">A single push operation on S1</li>
+						<li class="fragment">No matter how many elements are in the queue, enqueue always takes constant
+							time</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Dequeue Operation - Best Case</h3>
+					<div class="twostack-algorithm-section">
+						<pre><code style="line-height: 2.5rem;">if S2.isEmpty()
+  while !S1.isEmpty()
+    S2.push(S1.pop())
+return S2.pop()</code></pre>
+					</div>
+					<ul>
+						<li class="fragment"><b>Best case:</b> When S2 is <em>not empty</em></li>
+						<li class="fragment">Time complexity: $O(1)$</li>
+						<li class="fragment">Just pop from S2, no transfer needed</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Dequeue Operation - Worst Case</h3>
+					<div class="twostack-algorithm-section">
+						<pre><code style="line-height: 2.5rem;">if S2.isEmpty()
+  while !S1.isEmpty()
+    S2.push(S1.pop())
+return S2.pop()</code></pre>
+					</div>
+					<ul>
+						<li class="fragment"><b>Worst case:</b> When S2 is <em>empty</em> and S1 has $n$ elements</li>
+						<li class="fragment">Must transfer all $n$ elements from S1 to S2</li>
+						<li class="fragment">Each element: one pop from S1 + one push to S2 = $2n$ operations</li>
+						<li class="fragment">Time complexity: $O(n)$</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Space Complexity</h3>
+					<ul>
+						<li class="fragment"><b>Space:</b> $O(n)$ where $n$ is the number of elements in the queue</li>
+						<li class="fragment">Each element stored in exactly one stack (S1 or S2)</li>
+						<li class="fragment">No additional space beyond the two stacks</li>
+						<li class="fragment">Same space complexity as a standard queue!</li>
+					</ul>
+				</section>
+			</section>
+
+
+			<section>
+				<section>
+					<h2 class="common-mistakes">Min Stack</h2>
+					You are tasked to create a stack that supports constant time operation for <code>push</code>,
+					<code>pop</code>, <code>top</code> and <code>min</code>. <code>min</code>
+					is a function that should be able to retrieve the minimum element in the stack at constant time.
+				</section>
+
+				<section>
+					<h3>Finding Minimum - Naive Approach</h3>
+					<div id="min-stack-visualizer">
+						<div class="minstack-container">
+							<div class="minstack-code-section">
+								<div>
+									<h4>min() Algorithm</h4>
+									<pre><code id="min-code"><span data-line="1">min → S[1]</span>
+									<span data-line="2">for i = 2 to S.size - 1 do</span>
+									<span data-line="3">    if S[i] < min then</span>
+									<span data-line="4">        min → S[i]</span>
+									<span data-line="5">    endif</span>
+									<span data-line="6">endfor</span>
+									<span data-line="7">return min</span></code></pre>
+								</div>
+
+								<div class="minstack-controls">
+									<button onclick="runMinAlgorithm()" class="minstack-btn">▶</button>
+									<button onclick="resetMinStack()" class="minstack-btn"
+										style="margin-left: auto;">⟲</button>
+								</div>
+							</div>
+
+							<div class="minstack-visual-section">
+								<h4>Stack Visualization</h4>
+								<div id="min-stack" class="minstack-display">
+									<div class="minstack-item" id="min-item-0"><span
+											class="minstack-item-index">[1]</span>0</div>
+									<div class="minstack-item" id="min-item-1"><span
+											class="minstack-item-index">[2]</span>-1</div>
+									<div class="minstack-item" id="min-item-2"><span
+											class="minstack-item-index">[3]</span>76</div>
+									<div class="minstack-item" id="min-item-3"><span
+											class="minstack-item-index">[4]</span>-3</div>
+									<div class="minstack-item" id="min-item-4"><span
+											class="minstack-item-index">[5]</span>-8</div>
+									<div class="minstack-item" id="min-item-5"><span
+											class="minstack-item-index">[6]</span>12</div>
+								</div>
+								<div class="minstack-var-display">
+									<strong>min = <span id="min-value">?</span></strong>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h3>Time Complexity - Naive Approach</h3>
+					<div class="twostack-algorithm-section">
+						<pre><code style="line-height: 2.5rem;">min()
+  min → S[1]
+  for i = 2 to S.size - 1 do
+    if S[i] < min then
+      min → S[i]
+  return min</code></pre>
+					</div>
+					<ul>
+						<li class="fragment"><b>Time complexity:</b> $O(n)$ where $n$ is the number of elements in the
+							stack</li>
+						<li class="fragment">Must iterate through <em>all</em> elements to find the minimum</li>
+						<li class="fragment">This <b>does not meet</b> the constant time requirement $O(1)$</li>
+						<li class="fragment">We need a better approach!</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Attempt 2: Global Minimum Variable</h3>
+					<div id="global-min-visualizer">
+						<div class="minstack-container">
+							<div class="minstack-code-section">
+								<div>
+									<h4>Approach</h4>
+									<pre><code id="global-min-code" style="line-height: 2rem; font-size: 1.6rem;"><span data-line="1">push(x)</span>
+<span data-line="2">  S.push(x)</span>
+<span data-line="3">  if x < globalMin then</span>
+<span data-line="4">    globalMin ← x</span>
+<span data-line="5"></span>
+<span data-line="6">min()</span>
+<span data-line="7">  return globalMin</span>
+<span data-line="8"></span>
+<span data-line="9">pop()</span>
+<span data-line="10">  return S.pop()</span></code></pre>
+								</div>
+								<div class="minstack-controls">
+									<button onclick="globalMinPrevStep()" class="minstack-btn"
+										id="global-min-prev">◀</button>
+									<button onclick="globalMinNextStep()" class="minstack-btn"
+										id="global-min-next">▶</button>
+									<button onclick="resetGlobalMin()" class="minstack-btn"
+										style="margin-left: auto;">⟲</button>
+								</div>
+							</div>
+
+							<div class="minstack-visual-section">
+								<h4>Stack Visualization</h4>
+								<div id="global-min-stack" class="minstack-display">
+								</div>
+								<div class="minstack-var-display">
+									<strong>globalMin = <span id="global-min-value">∞</span></strong>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h3>Analysis of Global Minimum Approach</h3>
+					<ul>
+						<li class="fragment"><b>Advantages:</b>
+							<ul>
+								<li>Simple to implement</li>
+								<li>$O(1)$ time complexity for <code>min()</code> ✓</li>
+								<li>Minimal space overhead (just one variable)</li>
+							</ul>
+						</li>
+						<li class="fragment" style="margin-top: 1em;"><b>Fatal Flaw:</b>
+							<ul>
+								<li style="color: #dc3545;">Breaks when popping the minimum element ❌</li>
+								<li style="color: #dc3545;">Cannot recover the previous minimum</li>
+								<li style="color: #dc3545;">Produces incorrect results</li>
+							</ul>
+						</li>
+						<li class="fragment" style="margin-top: 1em; font-size: 2rem; color: #ffc107;"><b>We need a
+								better solution!</b></li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Solution: Two-Stack Approach</h3>
+					<div id="two-stack-min-visualizer">
+						<div class="minstack-container">
+							<div class="minstack-code-section">
+								<div>
+									<h4>Algorithm</h4>
+									<pre><code id="two-stack-code" style="line-height: 1.8rem; font-size: 1.5rem;"><span data-line="1">push(x)</span>
+<span data-line="2">  dataStack.push(x)</span>
+<span data-line="3">  currentMin = min(x, minStack.top())</span>
+<span data-line="4">  minStack.push(currentMin)</span>
+<span data-line="5"></span>
+<span data-line="6">pop()</span>
+<span data-line="7">  dataStack.pop()</span>
+<span data-line="8">  minStack.pop()</span>
+<span data-line="9"></span>
+<span data-line="10">min()</span>
+<span data-line="11">  return minStack.top()</span></code></pre>
+								</div>
+								<div class="minstack-controls">
+									<button onclick="twoStackPrevStep()" class="minstack-btn"
+										id="two-stack-prev">◀</button>
+									<button onclick="twoStackNextStep()" class="minstack-btn"
+										id="two-stack-next">▶</button>
+									<button onclick="resetTwoStack()" class="minstack-btn"
+										style="margin-left: auto;">⟲</button>
+								</div>
+							</div>
+
+							<div class="minstack-visual-section">
+								<h4>Stack Visualizations</h4>
+								<div style="display: flex; gap: 2rem; justify-content: center;">
+									<div style="flex: 1;">
+										<p style="text-align: center; font-weight: bold; margin-bottom: 0.5rem;">Data
+										</p>
+										<div id="data-stack" class="minstack-display" style="min-height: 300px;">
+										</div>
+									</div>
+									<div style="flex: 1;">
+										<p style="text-align: center; font-weight: bold; margin-bottom: 0.5rem;">Min</p>
+										<div id="min-stack-two" class="minstack-display" style="min-height: 300px;">
+										</div>
+									</div>
+								</div>
+								<div id="two-stack-message"
+									style="margin-top: 1.5rem; padding: 1rem; background: rgba(40, 167, 69, 0.2); border: 2px solid #28a745; border-radius: 8px; text-align: center; font-size: 1.6rem; display: none;">
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</section>
+		</div>
+	</div>
+
+	<script>
+		Reveal.initialize({
+			width: 960 * 2,
+			height: 700 * 2,
+			margin: 0.2,
+			minScale: 0.5,
+			maxScale: 2.0,
+
+			plugins: [RevealMath.KaTeX, RevealNotes],
+			history: true,
+		});
+		Reveal.configure({ pdfSeparateFragments: false });
+	</script>
+</body>
+
+</html>
